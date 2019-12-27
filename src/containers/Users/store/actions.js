@@ -22,9 +22,6 @@ const getUser = context => axios.get(
     context.commit('USER_UPDATED', user);
   })
   .catch((error) => {
-    if (process.env.NODE_ENV === 'development') {
-      console.error(error);
-    }
     context.commit('USER_UPDATED', {});
 
     throw error;
@@ -45,9 +42,6 @@ const signUp = (context, formData) => axios
     context.commit('USER_UPDATED', user);
   })
   .catch((error) => {
-    if (process.env.NODE_ENV === 'development') {
-      console.error(error);
-    }
     context.commit('USER_UPDATED', {});
 
     throw error;
@@ -73,9 +67,6 @@ const signIn = (context, payload) => axios
     context.commit('USER_UPDATED', user);
   })
   .catch((error) => {
-    if (process.env.NODE_ENV === 'development') {
-      console.error(error);
-    }
     context.commit('USER_UPDATED', {});
 
     throw error;

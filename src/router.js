@@ -43,11 +43,7 @@ router.beforeEach((to, from, next) => {
         next({ name: 'authentication' });
       }
     })
-    .catch((error) => {
-      if (process.env.NODE_ENV === 'development') {
-        console.error(error);
-      }
-
+    .catch(() => {
       next({ name: 'authentication' });
     });
 

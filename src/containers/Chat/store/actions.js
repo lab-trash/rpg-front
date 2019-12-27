@@ -10,10 +10,6 @@ const sendMessage = (context, data) => axios
   .then(() => {
   })
   .catch((error) => {
-    if (process.env.NODE_ENV === 'development') {
-      console.error(error);
-    }
-
     throw error;
   });
 
