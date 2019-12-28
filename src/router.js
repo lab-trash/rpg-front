@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Authentication from './containers/Users/Authentication.vue';
-import Chat from './containers/Chat/Chat.vue';
+import Game from './containers/Game/Game.vue';
 
 import store from './store';
 
@@ -10,8 +10,8 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'chat',
-    component: Chat,
+    name: 'game',
+    component: Game,
   },
   {
     path: '/compte',

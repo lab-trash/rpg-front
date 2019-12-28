@@ -1,7 +1,7 @@
 <template>
-  <div class="container mx-auto mt-6">
-    <h1 class="font-bold uppercase mb-6 text-xl text-center" v-text="title"></h1>
-    <form @submit.prevent="auth()" class="flex flex-col w-2/5 mx-auto">
+  <div class="container mx-auto">
+    <h1 class="font-bold uppercase text-xl text-center" v-text="title"></h1>
+    <form @submit.prevent="auth()" class="flex flex-col mx-5">
       <div class="notification-wrapper" v-if="isNotificationOpen">
         <notification
           :level="'error'"
@@ -30,7 +30,7 @@
       ></button>
     </form>
     <p
-      class="text-gray-100 underline cursor-pointer w-2/5 mx-auto text-center"
+      class="text-gray-100 underline cursor-pointer mx-auto text-center"
       v-text="link"
       @click="toggleAuthMode()"
     ></p>
@@ -88,7 +88,7 @@ export default {
         password: this.password,
       })
         .then(() => {
-          this.$router.push({ name: 'chat' });
+          this.$router.push({ name: 'game' });
         })
         .catch((error) => {
           this.errors = [];
@@ -102,7 +102,7 @@ export default {
     signUp() {
       this.$store.dispatch('signUp', this.registerUser)
         .then(() => {
-          this.$router.push({ name: 'chat' });
+          this.$router.push({ name: 'game' });
         })
         .catch((error) => {
           this.errors = [];
