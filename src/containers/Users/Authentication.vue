@@ -58,7 +58,9 @@ export default {
       return this.AuthModeConnection ? 'Connexion' : 'Création de compte';
     },
     link() {
-      return this.AuthModeConnection ? 'Pas encore de compte ? Inscris-toi ici !' : 'Déjà un compte ? Connecte-toi ici !';
+      return this.AuthModeConnection
+        ? 'Pas encore de compte ? Inscris-toi ici !'
+        : 'Déjà un compte ? Connecte-toi ici !';
     },
     submit() {
       return this.AuthModeConnection ? 'Se connecter' : 'Créer un compte';
@@ -88,7 +90,7 @@ export default {
         password: this.password,
       })
         .then(() => {
-          this.$router.push({ name: 'game' });
+          this.$router.push({ name: 'dashboard' });
         })
         .catch((error) => {
           this.errors = [];
@@ -102,7 +104,7 @@ export default {
     signUp() {
       this.$store.dispatch('signUp', this.registerUser)
         .then(() => {
-          this.$router.push({ name: 'game' });
+          this.$router.push({ name: 'dashboard' });
         })
         .catch((error) => {
           this.errors = [];

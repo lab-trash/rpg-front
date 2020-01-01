@@ -48,6 +48,7 @@ export default {
       messages: [],
       isNotificationOpen: false,
       errors: [],
+      gameId: this.$route.params.id,
     };
   },
   methods: {
@@ -57,6 +58,7 @@ export default {
       axios
         .post(`${process.env.VUE_APP_LCB_API_URL}/chat/messages`, {
           message: content,
+          gameId: this.gameId,
         },
         {
           headers: {
@@ -87,7 +89,7 @@ export default {
   },
   created() {
     axios.get(
-      `${process.env.VUE_APP_LCB_API_URL}/chat/messages`,
+      `${process.env.VUE_APP_LCB_API_URL}/chat/messages/${this.gameId}`,
       {
         headers: {
           'X-AUTH-TOKEN': sessionStorage.getItem('authenticationToken'),
@@ -107,8 +109,7 @@ export default {
       });
 
     const url = new URL('https://mercure-rpg.herokuapp.com/.well-known/mercure');
-    url.searchParams.append('topic', 'chat/messages');
-    // The URL class is a convenient way to generate URLs such as https://example.com/.well-known/mercure?topic=https://example.com/books/{id}&topic=https://example.com/users/dunglas
+    url.searchParams.append('topic', `chat/messages/${this.gameId}`);
 
     const eventSource = new EventSource(url);
 
@@ -124,10 +125,19 @@ export default {
         createdAt: new Date(messageData.createdAt),
         isGenerated: messageData.isGenerated,
       });
+
+      if (!this.isCurrentUser(messageData.emitter.name)) {
+        // eslint-disable-next-line no-new
+        new Notification(messageData.content);
+      }
     };
   },
   updated() {
     this.scrollToEnd();
+
+    if (Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
   },
 };
 </script>

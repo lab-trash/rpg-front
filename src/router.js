@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Authentication from './containers/Users/Authentication.vue';
 import Game from './containers/Game/Game.vue';
+import Dashboard from './containers/Dashboard/Dashboard.vue';
 
 import store from './store';
 
@@ -10,6 +11,11 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
+    name: 'dashboard',
+    component: Dashboard,
+  },
+  {
+    path: '/game/:id',
     name: 'game',
     component: Game,
   },
